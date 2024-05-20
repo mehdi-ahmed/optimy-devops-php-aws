@@ -1,11 +1,5 @@
-# A docker compose will build
-    -   An Apache server with php.
-    -   A MySQL server with phpMyAdmin console.
-
-    
 # To run the docker container locally:
-    - $> docker-compose up --build -d
+    
+    - $> docker build -t optimy-php-app .
+    - $> docker run -it --mount "type=bind,source=$(pwd)/source_dir,target=/var/www/html" -p 8001:80 -d --name my-running-optimy-php-app optimy-php-app  
     - $> curl http://localhost:8001/
-
-# To check the phpMyAdmin console and tables
-    -   - $> http://localhost:8899/

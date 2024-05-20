@@ -3,10 +3,10 @@ echo 'Comment ça va ??';
 echo '<br/>';
 echo '<br/>';
 
-$servername = getenv('DB_HOST', true) ?: getenv('DB_HOST');
-$dbname = getenv('DB_NAME', true) ?: getenv('DB_NAME');
-$username = getenv('DB_USER', true) ?: getenv('DB_USER');
-$password  = getenv('DB_PASS', true) ?: getenv('DB_PASS');
+$servername = getenv('SERVER_NAME');
+$username = getenv('USER');
+$password = getenv('PASSWORD');
+$dbname = getenv('DB_NAME');
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

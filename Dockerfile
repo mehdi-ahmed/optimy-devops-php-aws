@@ -1,31 +1,24 @@
-FROM php:8.2-apache
+FROM php:8.3-apache
 
-# Set the working directory
+# Install MySQL client, server, and other dependencies
+RUN apt-get update && apt-get install -y \
+      git \
+      zip \
+      curl \
+      sudo \
+      libpq-dev
+
+# Install mysqli PHP extension for MySQL support
+RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable mysqli pdo_mysql
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html
+
+# Set working directory
 WORKDIR /var/www/html
 
 # Copy the current directory contents into the container at /var/www/html
-COPY . /var/www/html/
-
-# Install dependencies
-RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_mysql
-
-RUN apt-get update && apt-get install -y \
-    git \
-    zip \
-    curl \
-    sudo \
-    unzip \
-    libzip-dev \
-    libicu-dev \
-    libbz2-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libmcrypt-dev \
-    libreadline-dev \
-    libfreetype6-dev \
-    g++
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+COPY ./ /var/www/html/
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
