@@ -9,11 +9,6 @@ $username = getenv('USER');
 $password = getenv('PASSWORD');
 $dbname = getenv('DB_NAME');
 
-$servername = 'host.docker.internal';
-$username = 'admin';
-$password = 'password';
-$dbname = 'assignment_db';
-
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
