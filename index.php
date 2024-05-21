@@ -3,26 +3,16 @@ echo 'Comment ça va ??';
 echo '<br/>';
 echo '<br/>';
 
+
 $servername = getenv('SERVER_NAME');
 $username = getenv('USER');
 $password = getenv('PASSWORD');
 $dbname = getenv('DB_NAME');
-$testEnv = getenv('TEST_ENV');
 
-echo '--------';
-echo '<br/>';
-echo 'servername = ' . $servername;
-echo '<br/>';
-echo '$username = ' . $username;
-echo '<br/>';
-echo 'password = ' . $password;
-echo '<br/>';
-echo 'dbname = ' . $dbname;
-echo '<br/>';
-echo '--------';
-echo '<br/>';
-echo 'TEST_ENV = ' . $testEnv;
-echo '<br/>';
+$servername = 'host.docker.internal';
+$username = 'admin';
+$password = 'password';
+$dbname = 'assignment_db';
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
